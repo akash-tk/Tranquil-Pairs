@@ -6,10 +6,8 @@ let cardsWon = [];
 const grid = document.getElementById('grid');
 const restartButton = document.getElementById('restart-btn');
 
-// Shuffle the cards array
 cardsArray.sort(() => 0.5 - Math.random());
 
-// Create game board
 function createBoard() {
   for (let i = 0; i < cardsArray.length; i++) {
     const card = document.createElement('div');
@@ -21,7 +19,6 @@ function createBoard() {
   }
 }
 
-// Check for matches
 function checkForMatch() {
   const cards = document.querySelectorAll('.card');
   const optionOneId = cardsChosenId[0];
@@ -43,7 +40,6 @@ function checkForMatch() {
   }
 }
 
-// Flip the card
 function flipCard() {
   const cardId = this.getAttribute('data-id');
   cardsChosen.push(cardsArray[cardId]);
@@ -55,7 +51,6 @@ function flipCard() {
   }
 }
 
-// Restart game
 function restartGame() {
   grid.innerHTML = '';
   cardsWon = [];
