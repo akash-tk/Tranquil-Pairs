@@ -2,6 +2,7 @@ const cardsArray = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 
 let cardsChosen = [];
 let cardsChosenId = [];
 let cardsWon = [];
+let gameLock = false;
 
 const grid = document.getElementById('grid');
 const restartButton = document.getElementById('restart-btn');
@@ -35,18 +36,23 @@ function checkForMatch() {
 
   cardsChosen = [];
   cardsChosenId = [];
+  gameLock = false;
+
   if (cardsWon.length === cardsArray.length / 2) {
     alert('Congratulations! You found all the matches!');
   }
 }
 
 function flipCard() {
+  if (gameLock) return;
   const cardId = this.getAttribute('data-id');
+  if (cardsChosenId.includes(cardId)) return;
   cardsChosen.push(cardsArray[cardId]);
   cardsChosenId.push(cardId);
   this.textContent = cardsArray[cardId];
 
   if (cardsChosen.length === 2) {
+    gameLock = true;
     setTimeout(checkForMatch, 500);
   }
 }
@@ -56,6 +62,7 @@ function restartGame() {
   cardsWon = [];
   cardsChosen = [];
   cardsChosenId = [];
+  gameLock = false;
   createBoard();
 }
 
